@@ -32,7 +32,7 @@ class SplashView extends GetView<SplashController> {
               Constrained(
                 padding: const EdgeInsets.all(8.0),
                 child: Button(
-                  onPressed: controller.onSignInPressed,
+                  onPressed: controller.goToHome,
                   title: 'Get Started'.tr,
                   variant: ButtonVariant.primary,
                 ),
@@ -40,7 +40,7 @@ class SplashView extends GetView<SplashController> {
               Constrained(
                 padding: const EdgeInsets.all(8.0),
                 child: Button(
-                  onPressed: controller.onSignInPressed,
+                  onPressed: controller.goToHome,
                   icon: BootstrapIcons.person_fill,
                   title: 'Sign In'.tr,
                   variant: ButtonVariant.accent,

@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'app/data/app_state.dart';
+import 'app/data/pocketbase_provider.dart';
+
 import 'app/themes/default.dart' as light;
 import 'app/themes/default_dark.dart' as dark;
 import 'app/routes/app_pages.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initServices();
 
   runApp(
     GetMaterialApp(
@@ -29,4 +34,10 @@ void main() {
       getPages: AppPages.routes,
     ),
   );
+}
+
+Future<void> initServices()  async {
+  final appState = AppState();
+  Get.put(appState);
+  await Get.putAsync(() => PocketbaseProvider(appState: appState).init());
 }
