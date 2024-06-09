@@ -2,14 +2,14 @@ import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:nanoplan/app/widgets/button.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
+import '../../../widgets/button.dart';
 import '../../../widgets/constrained.dart';
-import '../controllers/signup_controller.dart';
+import '../controllers/signin_controller.dart';
 
-class SignupView extends GetView<SignupController> {
-  const SignupView({super.key});
+class SigninView extends GetView<SigninController> {
+  const SigninView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +38,15 @@ class SignupView extends GetView<SignupController> {
                             Theme.of(context).colorScheme.primary,
                             Theme.of(context).colorScheme.secondary,
                           ],
-                          style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge!
+                              .copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
                         Text(
-                          'Sign up to continue'.tr,
+                          'Welcome back'.tr,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
@@ -107,9 +110,9 @@ class SignupView extends GetView<SignupController> {
                 Constrained(
                   child: Obx(
                     () => Button(
-                      onPressed: controller.signUp,
+                      onPressed: controller.signIn,
                       loading: controller.loading.value,
-                      title: 'Sign Up'.tr,
+                      title: 'Sign In'.tr,
                       variant: ButtonVariant.primary,
                     ),
                   ),

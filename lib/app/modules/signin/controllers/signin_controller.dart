@@ -2,12 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pocketbase/pocketbase.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../data/providers/auth_provider.dart';
 
-class SignupController extends GetxController {
+class SigninController extends GetxController {
   final AuthProvider authProvider;
 
   final passwordVisible = false.obs;
@@ -16,7 +15,7 @@ class SignupController extends GetxController {
 
   final loading = false.obs;
 
-  SignupController({
+  SigninController({
     required this.authProvider,
   });
 
@@ -32,17 +31,16 @@ class SignupController extends GetxController {
     passwordVisible.value = !passwordVisible.value;
   }
 
-  Future signUp() async {
+  Future signIn() async {
     if (nameController.text.isEmpty || passController.text.isEmpty) return;
 
     try {
       loading.value = true;
-      await authProvider.registerWithPassword(nameController.text, passController.text);
+      await authProvider.authWithPassword(nameController.text, passController.text);
       Get.offAllNamed(Routes.HOME);
     } catch (e) {
-      final err = e as ClientException;
-      log('Failed to sign up: $err');
-      Get.snackbar('Error', 'Failed to sign up: ${err.response['message']}');
+      log('Failed to authenticate: $e');
+      Get.snackbar('Error', 'Failed to authenticate: $e');
     } finally {
       loading.value = false;
     }

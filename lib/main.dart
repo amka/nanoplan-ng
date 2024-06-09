@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'app/data/app_state.dart';
-import 'app/data/pocketbase_provider.dart';
+import 'app/data/providers/app_state.dart';
+import 'app/data/providers/auth_provider.dart';
 
 import 'app/themes/default.dart' as light;
 import 'app/themes/default_dark.dart' as dark;
@@ -27,6 +27,7 @@ Future<void> main() async {
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: dark.colorScheme,
         textTheme: GoogleFonts.nunitoTextTheme(),
+        primaryColor: dark.primaryColor,
         canvasColor: dark.colorScheme.onSurface,
         scaffoldBackgroundColor: dark.backgroundColor,
       ),
@@ -39,5 +40,5 @@ Future<void> main() async {
 Future<void> initServices()  async {
   final appState = AppState();
   Get.put(appState);
-  await Get.putAsync(() => PocketbaseProvider(appState: appState).init());
+  Get.put(AuthProvider(appState: appState));
 }

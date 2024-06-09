@@ -9,45 +9,52 @@ class Button extends StatelessWidget {
     this.title,
     this.icon,
     this.variant = ButtonVariant.base,
+    this.loading = false,
   });
 
   final Function()? onPressed;
   final String? title;
   final IconData? icon;
   final ButtonVariant variant;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: onPressed,
+      onPressed: loading ? null : onPressed,
       shape: const StadiumBorder(),
       color: getBgColor(context, variant),
       textColor: getTextColor(context, variant),
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (icon != null)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: Icon(
-                icon!,
-                size: 16,
-                color: getTextColor(context, variant),
-              ),
+      child: loading
+          ? const CircularProgressIndicator()
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (icon != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: Icon(
+                      icon!,
+                      size: 16,
+                      color: getTextColor(context, variant),
+                    ),
+                  ),
+                if (title != null)
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Text(
+                        title!,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: getTextColor(context, variant),
+                            ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
-          if (title != null)
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: Text(
-                  title!,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-        ],
-      ),
     );
   }
 
