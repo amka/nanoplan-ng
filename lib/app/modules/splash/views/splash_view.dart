@@ -14,10 +14,6 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('SplashView'),
-          centerTitle: true,
-        ),
         body: SizedBox(
           width: double.infinity,
           child: Column(
