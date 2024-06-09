@@ -11,6 +11,14 @@ class SplashController extends GetxController {
   get authMethods => authProvider.authProviders;
   get emailPassword => authProvider.emailPassword;
 
+  @override
+  void onReady() {
+    super.onReady();
+    if (authProvider.isAuthenticated) {
+      goToHome();
+    }
+  }
+
   Future<void> fetchAuthMethods() async {
     await authProvider.fetchAuthMethods();
   }

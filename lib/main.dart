@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app/data/providers/app_state.dart';
@@ -38,6 +39,7 @@ Future<void> main() async {
 }
 
 Future<void> initServices()  async {
+  await GetStorage.init();
   final appState = AppState();
   Get.put(appState);
   Get.put(AuthProvider(appState: appState));

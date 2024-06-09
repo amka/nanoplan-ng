@@ -11,6 +11,8 @@ class AuthProvider extends PocketbaseProvider {
   final emailPassword = true.obs;
   final authProviders = <auth_models.AuthProvider>[].obs;
 
+  get isAuthenticated => pb.authStore.isValid;
+
   Future<void> fetchAuthMethods() async {
     if (initialized) return;
 
