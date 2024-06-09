@@ -1,0 +1,25 @@
+name: nanoplan
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=3.4.1 <4.0.0'
+
+dependencies: 
+  get: 4.6.6
+  flutter: 
+    sdk: flutter
+  nanoid: ^1.0.0
+  google_fonts: ^6.2.1
+  get_storage: ^2.1.1
+  pocketbase: ^0.18.1
+  bootstrap_icons: ^1.11.3
+
+dev_dependencies: 
+  flutter_lints: ^3.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
