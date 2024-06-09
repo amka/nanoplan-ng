@@ -15,8 +15,6 @@ dependencies:
   simple_gradient_text: 1.3.0
   flutter: 
     sdk: flutter
-  webview_universal: ^0.0.5
-  url_launcher: ^6.3.0
 
 dev_dependencies: 
   flutter_lints: ^3.0.0

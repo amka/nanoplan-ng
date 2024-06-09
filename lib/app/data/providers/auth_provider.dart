@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../models/user.dart';
 import 'pocketbase_provider.dart';
@@ -38,21 +37,6 @@ class AuthProvider extends PocketbaseProvider {
     return await fetchUser(authData.record!.id);
   }
 
-  Future<User> authWithOauth2(String provider) async {
-    final authData =
-        await pb.collection('users').authWithOAuth2(provider, (url) async {
-      // or use something like flutter_custom_tabs to make the transitions between native and web content more seamless
-
-      if (!await launchUrl(
-        url,
-        mode: LaunchMode.externalApplication,
-      )) {
-        throw Exception('Could not launch $url');
-      }
-    });
-    return await fetchUser(authData.record!.id);
-  }
-
   Future<User> registerWithPassword(String email, String password) async {
     // example create body
     final body = <String, dynamic>{
@@ -68,6 +52,5 @@ class AuthProvider extends PocketbaseProvider {
     // await pb.collection('users').requestVerification(email);
 
     return await authWithPassword(email, password);
-
   }
 }
