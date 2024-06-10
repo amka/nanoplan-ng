@@ -41,85 +41,93 @@ class SplashView extends GetView<SplashController> {
                   //   ),
                   // ),
                   const Spacer(),
-                  Card(
-                    color: Theme.of(context).cardColor,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 12),
-                      child: Column(
-                        children: [
-                          Constrained(
-                            padding: const EdgeInsets.only(
-                                top: 16, bottom: 8, left: 8, right: 8),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: GradientText(
-                                'Nanoplan'.tr,
-                                colors: [
-                                  Theme.of(context).colorScheme.primary,
-                                  Theme.of(context).colorScheme.secondary,
-                                ],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge!
-                                    .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                            ),
-                          ),
-                          if (controller.emailPassword.value)
-                            Constrained(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Button(
-                                onPressed: controller.goToHome,
-                                title: 'Get Started'.tr,
-                                variant: ButtonVariant.primary,
-                              ),
-                            ),
-                          Constrained(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Button(
-                              onPressed: () => controller.onSignIn('yandex'),
-                              icon: BootstrapIcons.person_fill,
-                              title: 'Sign In'.tr,
-                              variant: ButtonVariant.accent,
-                            ),
-                          ),
-                          // Don't have an account? Create one
-                          Constrained(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    'Don\'t have an account?'.tr,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
+                  Obx(
+                    () => controller.loading.value
+                        ? CircularProgressIndicator.adaptive()
+                        : Card(
+                            color: Theme.of(context).cardColor,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 12),
+                              child: Column(
+                                children: [
+                                  Constrained(
+                                    padding: const EdgeInsets.only(
+                                        top: 16, bottom: 8, left: 8, right: 8),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: GradientText(
+                                        'Nanoplan'.tr,
+                                        colors: [
+                                          Theme.of(context).colorScheme.primary,
+                                          Theme.of(context)
                                               .colorScheme
-                                              .onSurface,
+                                              .secondary,
+                                        ],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineLarge!
+                                            .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                  if (controller.emailPassword.value)
+                                    Constrained(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Button(
+                                        onPressed: controller.goToHome,
+                                        title: 'Get Started'.tr,
+                                        variant: ButtonVariant.primary,
+                                      ),
+                                    ),
+                                  Constrained(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Button(
+                                      onPressed: () =>
+                                          controller.onSignIn('yandex'),
+                                      icon: BootstrapIcons.person_fill,
+                                      title: 'Sign In'.tr,
+                                      variant: ButtonVariant.accent,
+                                    ),
+                                  ),
+                                  // Don't have an account? Create one
+                                  Constrained(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            'Don\'t have an account?'.tr,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface,
+                                                ),
+                                          ),
                                         ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: TextButton(
-                                    onPressed: controller.goToSignUp,
-                                    child: Text('Create one'.tr),
-                                  ),
-                                )
-                              ],
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: TextButton(
+                                            onPressed: controller.goToSignUp,
+                                            child: Text('Create one'.tr),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
+                          ),
                   ),
                   const SizedBox(height: 32),
                 ],

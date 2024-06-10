@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 
 import '../../../data/providers/auth_provider.dart';
@@ -6,16 +8,24 @@ import '../../../routes/app_pages.dart';
 class SplashController extends GetxController {
   AuthProvider authProvider = Get.find();
 
-  final loading = false.obs;
+  final loading = true.obs;
 
   get authMethods => authProvider.authProviders;
   get emailPassword => authProvider.emailPassword;
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
+
     if (authProvider.isAuthenticated) {
-      goToHome();
+      try {
+        final user = await authProvider.fetchUser();
+        if (user != null) goToHome();
+      } catch (e) {
+        log('Failed to fetch user: $e');
+      } finally {
+        loading.value = false;
+      }
     }
   }
 

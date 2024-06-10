@@ -5,8 +5,6 @@ import 'pocketbase_provider.dart';
 import '../models/auth_provider.dart' as auth_models;
 
 class AuthProvider extends PocketbaseProvider {
-  AuthProvider({required super.appState});
-
   final emailPassword = true.obs;
   final authProviders = <auth_models.AuthProvider>[].obs;
 
@@ -24,20 +22,23 @@ class AuthProvider extends PocketbaseProvider {
     }
   }
 
-  Future<User> fetchUser(String userId) async {
+  Future<User?> fetchUser({String? userId}) async {
+    userId = userId ?? pb.authStore.model?.id;
+    if (userId == null) return null;
+
     final record = await pb.collection('users').getOne(userId);
     final user = User.fromRecord(record);
     appState.setCurrentUser(user);
     return user;
   }
 
-  Future<User> authWithPassword(String email, String password) async {
+  Future<User?> authWithPassword(String email, String password) async {
     final authData =
         await pb.collection('users').authWithPassword(email, password);
-    return await fetchUser(authData.record!.id);
+    return await fetchUser(userId: authData.record!.id);
   }
 
-  Future<User> registerWithPassword(String email, String password) async {
+  Future<User?> registerWithPassword(String email, String password) async {
     // example create body
     final body = <String, dynamic>{
       "email": email,
