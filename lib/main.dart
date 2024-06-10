@@ -6,10 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app/data/providers/app_state.dart';
 import 'app/data/providers/auth_provider.dart';
-
+import 'app/data/providers/project_provider.dart';
+import 'app/routes/app_pages.dart';
 import 'app/themes/default.dart' as light;
 import 'app/themes/default_dark.dart' as dark;
-import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,9 +38,10 @@ Future<void> main() async {
   );
 }
 
-Future<void> initServices()  async {
+Future<void> initServices() async {
   await GetStorage.init();
   final appState = AppState();
   Get.put(appState);
-  Get.put(AuthProvider(appState: appState));
+  Get.put(AuthProvider());
+  Get.put(ProjectProvider());
 }

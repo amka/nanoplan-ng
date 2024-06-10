@@ -27,6 +27,8 @@ class User {
     this.verified,
   });
 
+  String get displayName => username ?? name ?? 'User';
+
   User copyWith({
     String? avatar,
     String? collectionId,

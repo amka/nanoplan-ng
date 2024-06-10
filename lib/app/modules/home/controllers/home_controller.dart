@@ -1,23 +1,27 @@
 import 'package:get/get.dart';
 
+import '../../../data/models/project.dart';
+import '../../../data/providers/app_state.dart';
+import '../../../data/providers/auth_provider.dart';
+import '../../../data/providers/project_provider.dart';
+
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  final AppState appState;
+  final AuthProvider authProvider;
+  final ProjectProvider projectProvider;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  final projects = <Project>[].obs;
+
+  HomeController({
+    required this.appState,
+    required this.authProvider,
+    required this.projectProvider,
+  });
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
+    projects.addAll(await projectProvider.fetchProjects());
   }
-
-  void increment() => count.value++;
 }
