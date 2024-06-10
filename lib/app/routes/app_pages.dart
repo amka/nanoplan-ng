@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/project/bindings/project_binding.dart';
+import '../modules/project/views/project_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -38,6 +40,11 @@ class AppPages {
       name: _Paths.SIGNIN,
       page: () => const SigninView(),
       binding: SigninBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROJECT,
+      page: () => ProjectView(),
+      binding: ProjectBinding(),
     ),
   ];
 }

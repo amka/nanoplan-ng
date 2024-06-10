@@ -2,6 +2,7 @@ import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:nanoplan/app/routes/app_pages.dart';
 
 import '../../../data/models/project.dart';
 import '../../../widgets/header_sliver_bar.dart';
@@ -116,17 +117,22 @@ class ProjectCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                project.title ?? 'Project',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.surface,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+              Hero(
+                tag: ValueKey(project.id),
+                child: Text(
+                  project.title ?? 'Project',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.surface,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                ),
               ),
               CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.surface,
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.PROJECT, arguments: project);
+                    },
                     icon: Icon(
                       BootstrapIcons.arrow_up_right,
                       color: Theme.of(context).colorScheme.onSurface,
